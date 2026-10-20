@@ -54,8 +54,11 @@ function App(){
       landmarkerRef.current=await createLandmarker()
       setCameraOn(true); setStatus('相機已啟動・請站到畫面中央')
       rafRef.current=requestAnimationFrame(loop)
-    }catch(e){setStatus('相機啟動失敗');setNotice('請確認使用 HTTPS、允許相機權限，並使用 Safari 或 Chrome。');console.error(e)}
-  }
+   }catch(e){
+      setStatus('啟動失敗：'+(e?.name||'Error'))
+      setNotice((e?.name||'Error')+': '+(e?.message||'未知錯誤'))
+      console.error('MoveLab 啟動錯誤：',e)
+    }
   function stopCamera(){
     if(rafRef.current) cancelAnimationFrame(rafRef.current)
     if(streamRef.current) streamRef.current.getTracks().forEach(t=>t.stop())
