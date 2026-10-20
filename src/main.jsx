@@ -68,8 +68,6 @@ function App(){
 
   setStatus('啟動失敗')
   setNotice(detail)
-}
-}
 
 } 
 
