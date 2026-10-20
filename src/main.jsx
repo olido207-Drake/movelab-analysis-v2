@@ -54,12 +54,21 @@ function App(){
       landmarkerRef.current=await createLandmarker()
       setCameraOn(true); setStatus('相機已啟動・請站到畫面中央')
       rafRef.current=requestAnimationFrame(loop)
- } catch(e){
+} catch(e) {
+  console.error('MoveLab 啟動錯誤：', e)
+  console.error('錯誤名稱：', e?.name)
+  console.error('錯誤訊息：', e?.message)
+  console.error('錯誤堆疊：', e?.stack)
 
-  setStatus('啟動失敗：'+(e?.name||'Error'))
-  setNotice((e?.name||'Error')+': '+(e?.message||'未知錯誤'))
-  console.error('MoveLab 啟動錯誤：',e)
+  const detail = [
+    e?.name || '未知錯誤',
+    e?.message || String(e),
+    e?.stack || ''
+  ].filter(Boolean).join('\n')
 
+  setStatus('啟動失敗')
+  setNotice(detail)
+}
 }
 
 } 
