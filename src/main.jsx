@@ -66,11 +66,12 @@ function App(){
     e?.stack || ''
   ].filter(Boolean).join('\n')
 
-  setStatus('啟動失敗')
+ setStatus('啟動失敗')
   setNotice(detail)
+}
+}
 
-} 
-
+function stopCamera(){
 function stopCamera(){
     if(rafRef.current) cancelAnimationFrame(rafRef.current)
     if(streamRef.current) streamRef.current.getTracks().forEach(t=>t.stop())
