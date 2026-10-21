@@ -72,7 +72,6 @@ function App(){
 }
 
 function stopCamera(){
-function stopCamera(){
     if(rafRef.current) cancelAnimationFrame(rafRef.current)
     if(streamRef.current) streamRef.current.getTracks().forEach(t=>t.stop())
     streamRef.current=null; setCameraOn(false); setRecording(false)
